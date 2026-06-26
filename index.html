@@ -188,9 +188,6 @@ footer{border-top:1px solid var(--border);padding:1.75rem 3rem;display:flex;just
 <body>
 
 <!-- INTRO LOADER -->
-<div id="intro-loader">
-  <p class="intro-name">Kiana Cooper</p>
-  <div class="intro-line"></div>
   <p class="intro-sub">DevSecOps · Cloud · Web Dev</p>
 </div>
 
@@ -706,7 +703,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 3rem;display:flex;just
 <style>
 /* INTRO LOADER */
 #intro-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity 0.6s ease,visibility 0.6s ease}
-#intro-loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+#intro-loader.hide{opacity:0;visibility:hidden;pointer-events:none;display:none}
 .intro-name{font-family:'Exo 2',sans-serif;font-weight:200;font-size:clamp(1.5rem,4vw,3rem);color:var(--white);letter-spacing:0.4em;text-transform:uppercase;opacity:0;animation:introFade 0.6s ease 0.3s forwards}
 .intro-line{width:0;height:1px;background:var(--accent);animation:introLine 0.8s ease 0.8s forwards}
 .intro-sub{font-family:'Exo 2',sans-serif;font-size:0.62rem;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:var(--text3);opacity:0;animation:introFade 0.5s ease 1.2s forwards}
@@ -785,7 +782,16 @@ body.light-mode{--bg:#f5f5f3;--bg2:#eeeeec;--bg3:#e5e5e3;--border:#d8d8d6;--bord
 </style>
 <script>
 /* INTRO */
-window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('intro-loader').classList.add('hide'),2000)});
+document.addEventListener('DOMContentLoaded',()=>{
+  const loader=document.getElementById('intro-loader');
+  if(loader){
+    setTimeout(()=>{
+      loader.style.opacity='0';
+      loader.style.visibility='hidden';
+      setTimeout(()=>loader.style.display='none',600);
+    },1800);
+  }
+});
 /* NAV */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
